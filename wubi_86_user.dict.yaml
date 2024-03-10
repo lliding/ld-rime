@@ -1,0 +1,30 @@
+# encoding: utf-8
+# Rime dictionary
+
+---
+name: wubi_86_user
+version: "2024.02.25"
+sort: by_weight
+columns:
+  - text
+  - code
+  - weight
+...
+
+Rime	rime	7
+中州韵	rime	6
+https://rime.im/	rime	5
+小狼毫	rime	4
+weasel	rime	3
+鼠须管	rime	2
+squirrel	rime	1
+
+lishouzhong.com	lsz
+lishouzhong	lsz
+
+git 	git	1
+
+github.com	github	2
+github	github	1
+
+李守中	spkh

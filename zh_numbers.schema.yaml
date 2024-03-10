@@ -1,0 +1,144 @@
+# encoding: utf-8
+# Rime schema settings
+#
+# Original schema author
+# Rime 官方教程: 數字之道
+#
+# Changelog
+#
+# 2022-09-14 Li Ding <ld.sino@outlook.com>
+#   - 从教程导出并整理本方案
+#
+
+schema:
+  schema_id: zh_numbers
+  name: 中文数字
+  version: "2022-09-14"
+  description: 快捷输入中文大小写数字
+
+switches:
+  - name: full_shape
+    states: [ 壹贰叁, 一二三 ]
+    reset: 0
+
+engine:
+  processors:
+    - key_binder
+    - punctuator
+    - selector
+    - express_editor
+  segmentors:
+    - punct_segmentor
+  translators:
+    - punct_translator
+
+menu:
+  # 选择候选词的键，相当于 12345，
+  # 因为这个输入方案中的数字已经用于输入文字了，
+  # 不能使用12345作为候选词的选择键
+  alternative_select_keys: "acegi"
+
+punctuator:
+  half_shape:
+    # 壹贰叁 模式下
+    "1": 壹
+    "2": 贰
+    "3": 叁
+    "4": 肆
+    "5": 伍
+    "6": 陆
+    "7": 柒
+    "8": 捌
+    "9": 玖
+    "0": 零
+    "s": 拾
+    "b": 佰
+    "q": 仟
+    "w": 万
+    "j": 角
+    "f": 分
+    "n": 年
+    "y": [ 元, 月, 亿 ]
+    "r": 日
+    "x": 星期
+    "z": [ 整, 之 ]
+    "d": 第
+    "h": 号
+    ".": 点
+    # shift + key
+    "!": 一
+    "@": 二
+    "#": 三
+    "$": [ 四, ￥]
+    "%": [ 五, 百分之 ]
+    "^": 六
+    "&": 七
+    "*": 八
+    "(": 九
+    ")": 〇
+    "S": 十
+    "B": 百
+    "Q": 千
+    "W": 万
+    "J": 角
+    "F": 分
+    "N": 年
+    "Y": [ 元, 月, 亿 ]
+    "R": 日
+    "X": 星期
+    "Z": [ 整, 之 ]
+    "D": 第
+    "H": 号
+    ">": 点
+
+  # 一二三 模式下
+  full_shape:
+    "1": 一
+    "2": 二
+    "3": 三
+    "4": 四
+    "5": 五
+    "6": 六
+    "7": 七
+    "8": 八
+    "9": 九
+    "0": 〇
+    "s": 十
+    "b": 百
+    "q": 千
+    "w": 万
+    "n": 年
+    "y": [ 元, 月, 亿 ]
+    "r": 日
+    "x": 星期
+    "j": 角
+    "f": 分
+    "z": [ 整, 之 ]
+    "d": 第
+    "h": 号
+    ".": 点
+    # shift + key
+    "!": 壹
+    "@": 贰
+    "#": 叁
+    "$": [ 肆, ￥]
+    "%": [ 伍, 百分之 ]
+    "^": 陆
+    "&": 柒
+    "*": 捌
+    "(": 玖
+    ")": 零
+    "S": 拾
+    "B": 佰
+    "Q": 仟
+    "W": 万
+    "J": 角
+    "F": 分
+    "N": 年
+    "Y": [ 元, 月, 亿 ]
+    "R": 日
+    "X": 星期
+    "Z": [ 整, 之 ]
+    "D": 第
+    "H": 号
+    ">": 点

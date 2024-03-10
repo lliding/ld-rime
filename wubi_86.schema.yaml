@@ -1,0 +1,110 @@
+# encoding: utf-8
+# Rime schema settings
+#
+# Changelog
+#
+
+schema:
+  schema_id: wubi_86
+  name: "五笔_86"
+  version: "2024.02.25"
+  author:
+    - Li Ding <ld.sino@outlook.com>
+  description: |
+    五笔86版
+    王永民先生发明
+    码表源自微软五笔 (Win10 21H2) 去除词组的部分
+    敲 z 键进入拼音反查
+  dependencies:
+    - pinyin # 反查
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, 西文 ]
+  - name: full_shape
+    reset: 0
+    states: [ 半角, 全角 ]
+  - name: ascii_punct
+    reset: 0
+    states: [ 。，, ．， ]
+  - name: zh_trad
+    reset: 0
+    states: [ 简体, 繁体 ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - reverse_lookup_translator
+    - table_translator
+    - lua_translator@date_time_translator
+  filters:
+    - simplifier
+    - uniquifier
+
+speller:
+  delimiter: " ;'"
+  # auto_select: true
+  max_code_length: 4
+
+translator:
+  dictionary: wubi_86           # search on <dictionary>.dict.yaml file
+  enable_charset_filter: true   # 使用字符集过滤
+  encode_commit_history: false  # 对已上屏的词自动成词
+  enable_encoder: false         # 使用自动造词，允许新词进入用户词典
+  enable_sentence: false        # 使用自动造句
+  enable_user_dict: false       # 是否生成 .userdb 用户词典。用户词典记录动态字词频，用户词。
+  # max_phrase_length: 4          # 最大自动成词的词长，开启用户词典后生效
+  disable_user_dict_for_patterns:
+    - "^z.*$"
+
+reverse_lookup:
+  dictionary: pinyin
+  # prism: pinyin_zrm   # 全拼反查。取消注释，反查模式为双拼反查。
+  prefix: "z"
+  suffix: "'"
+  tips: 〔拼音〕
+  preedit_format:
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+
+punctuator:
+  full_shape:
+    __include: punctuation:/full_shape
+  half_shape:
+    __include: punctuation:/half_shape
+  symbols:
+    __include: symbols:/symbols
+
+key_binder:
+  import_preset: default
+
+recognizer:
+  import_preset: default
+  patterns:
+    punct: '^/([0-9]0?|[A-Za-z]+)$' # symbol 用的
+    reverse_lookup: "^z[a-z]*'?$"   # 笔画反查用的
+
+simplifier:
+  # 简入繁出，由 opencc 简繁转换库实现
+  option_name: zh_trad
+  opencc_config: s2t.json
+  # opencc_config: t2s.json   # 繁 -> 简【默认】
+  # opencc_config: t2tw.json  # 繁 -> 台湾
+  # opencc_config: t2hk.json  # 繁 -> 香港

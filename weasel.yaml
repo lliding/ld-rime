@@ -1,0 +1,73 @@
+# Weasel settings
+# encoding: utf-8
+
+config_version: "0.22"
+
+app_options:
+  cmd.exe:
+    ascii_mode: true
+  conhost.exe:
+    ascii_mode: true
+
+style:
+  color_scheme: cool_breeze
+  font_face: "Microsoft YaHei"
+  font_point: 14
+  label_font_point: 11
+  label_format: "%s."
+  mark_text: ""
+  # horizontal: true          # 横向排列候选
+  inline_preedit: true      # 隐藏打字栏
+  fullscreen: false
+  preedit_type: composition
+  display_tray_icon: false  # 显示托盘图标
+  vertical_auto_reverse: false
+  vertical_text: false
+  vertical_text_left_to_right: false
+  vertical_text_with_wrap: false
+  layout:
+    enhanced_position: true # 获取光标位置失败后在窗口左上角绘制输入框
+    align_type: center
+    max_width: 0
+    min_width: 0
+    min_height: 0
+    max_height: 0
+    border_width: 1 # 边框宽度
+    margin_x: 8 # 候选字左右边距
+    margin_y: 8 # 候选字上下边距
+    candidate_spacing: 8 # 候选字间隔，小于等于 margin 时，其值等于 margin 的值
+    hilite_spacing: 2 # 标签和候选字的间隔
+    hilite_padding: 4 # 候选字背景色块的额外高度
+    spacing: 10 # 打字栏与候选栏的间距
+    corner_radius: 2 # 候选栏圆角幅度
+    # hilited_corner_radius: 2 # 候选字背景色块圆角幅度
+    round_corner: 2 # 是 hilited_corner_radius 的别名
+    shadow_radius: 0
+    shadow_offset_x: 4
+    shadow_offset_y: 4
+
+preset_color_schemes:
+  tantsing:
+    name: "丹青／Tantsing"
+    author: Mijiag
+    text_color: 0x000000
+    back_color: 0xE3E3E3
+    border_color: 0x000000
+    candidate_text_color: 0x000000
+    comment_text_color: 0x474747
+    hilited_back_color: 0x1A0791
+    hilited_candidate_back_color: 0x6F0B73
+    hilited_candidate_text_color: 0xE3E3E3
+    hilited_text_color: 0xE3E3E3
+
+  cool_breeze:
+    name: "清風／Cool Breeze"
+    author: "skoj <skoj@qq.com>"
+    text_color: 0x0000FF
+    back_color: 0xFFFBFB
+    border_color: 0xFFAAAA
+    hilited_text_color: 0x0000CE
+    hilited_back_color: 0xFFFBFB
+    candidate_text_color: 0x009100
+    hilited_candidate_text_color: 0x6F003A
+    hilited_candidate_back_color: 0xFFD6AC

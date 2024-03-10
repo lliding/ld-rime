@@ -1,0 +1,24 @@
+# encoding: utf-8
+# Rime dictionary
+#
+# Original table author
+# Li Ding <ld.sino@outlook.com>
+#
+# Changelog
+#
+# 2022-09-14 Li Ding <ld.sino@outlook.com>
+#   - add pinyin_open_source_proj.dict.yaml as dict
+#   - add pinyin.zhwiki20220722.dict.yaml as dict
+#
+# 2024-02-25 Li Ding <ld.sino@outlook.com>
+#   - add pinyin_user.dict.yaml as user dict
+#   - reorganize dict structure
+
+---
+name: pinyin
+version: "0.1"
+import_tables:
+  - pinyin_open_source_proj
+  - pinyin.zhwiki20220722
+  - pinyin_user
+...
