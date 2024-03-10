@@ -1,0 +1,31 @@
+# encoding: utf-8
+# Rime dictionary
+
+---
+name: pinyin_user
+version: "2024.02.25"
+sort: original
+columns:
+  - text
+  - code
+  - weight
+...
+
+Rime	rime	7
+中州韵	rime	6
+https://rime.im/	rime	5
+小狼毫	rime	4
+weasel	rime	3
+鼠须管	rime	2
+squirrel	rime	1
+
+git 	git	1
+
+github.com	github	2
+github	github	1
+
+lishouzhong.com	lsz	3
+lishouzhong	lsz	2
+李守中	lsz	1
+
+李鼎	liding	999999

@@ -1,0 +1,111 @@
+# encoding: utf-8
+# Rime schema settings
+#
+# Original schema author
+# Rime 五筆畫 v0.5 作者: 四季的風 雪齋 Kunki Chou
+#
+# Changelog
+# 2022-09-14 Li Ding <ld.sino@outlook.com>
+#   - turn off word creation related functions and dynamic user dict
+#
+
+schema:
+  schema_id: stroke
+  name: "笔画"
+  version: "2022-09-14"
+  author:
+    - 四季的風
+    - 雪齋
+    - Kunki Chou
+    - Li Ding <ld.sino@outlook.com>
+  description: |
+    笔画
+    h,s,p,n,z 代表横、竖、撇、捺、折
+    由 Rime 五筆畫 v0.5 修改而来
+  dependencies:
+    - pinyin
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, 西文 ]
+  - name: full_shape
+    reset: 0
+    states: [ 半角, 全角 ]
+  - name: ascii_punct
+    reset: 0
+    states: [ 。，, ．， ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - reverse_lookup_translator
+    - table_translator
+
+speller:
+  alphabet: "abcdefghijklmnopqrstuvwxyz"
+  delimiter: " '"
+
+menu:
+  page_size: 9
+
+translator:
+  dictionary: stroke            # search on <dictionary>.dict.yaml file
+  enable_charset_filter: true   # 使用字符集过滤
+  encode_commit_history: false  # 对已上屏的词自动成词
+  enable_encoder: false         # 使用自动造词，允许新词进入用户词典
+  enable_sentence: false        # 使用自动造句
+  enable_user_dict: false       # 是否生成 .userdb 用户词典。用户词典记录动态字词频，用户词。
+  # max_phrase_length: 4          # 最大自动成词的词长，开启用户词典后生效
+  preedit_format:
+    - xlit/hspnz/一丨丿丶乙/
+  comment_format:
+    - xform/~//
+    - xlit/hspnz/一丨丿丶乙/
+
+abc_segmentor:
+  extra_tags:
+    - reverse_lookup
+
+reverse_lookup:
+  dictionary: pinyin
+  prefix: "`"
+  suffix: "'"
+  tips: 〔拼音〕
+  preedit_format:
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+  comment_format:
+    - xlit/hspnz/一丨丿丶乙/
+
+punctuator:
+  full_shape:
+    __include: punctuation:/full_shape
+  half_shape:
+    __include: punctuation:/half_shape
+  symbols:
+    __include: symbols:/symbols
+
+key_binder:
+  import_preset: default
+
+recognizer:
+  import_preset: default
+  patterns:
+    reverse_lookup: "`[a-z]*'?$"

@@ -1,0 +1,174 @@
+# encoding: utf-8
+# Rime schema settings
+#
+# Original schema author
+# Li Ding <ld.sino@outlook.com>
+#
+# Changelog
+#
+
+schema:
+  schema_id: pinyin_zrm
+  name: 双拼_自然码
+  version: "2024.02.25"
+  author:
+    - Li Ding <ld.sino@outlook.com>
+  description: |
+    双拼自然码方案映射到全拼，无形码。
+  dependencies:
+    - stroke # 反查
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, 西文 ]
+  - name: full_shape
+    reset: 0
+    states: [ 半角, 全角 ]
+  - name: ascii_punct
+    reset: 0
+    states: [ 。，, ．， ]
+  - name: zh_trad
+    reset: 0
+    states: [ 简体, 繁体 ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - reverse_lookup_translator
+    - table_translator
+    - script_translator
+    - lua_translator@date_time_translator
+  filters:
+    - simplifier
+    - uniquifier
+
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " '"
+  algebra:
+    - erase/^xx$/
+    - derive/^([jqxy])u$/$1v/
+    - derive/^([aoe])([ioun])$/$1$1$2/
+    - xform/^([aoe])(ng)?$/$1$1$2/
+    - xform/iu$/Q/
+    - xform/[iu]a$/W/
+    - xform/[uv]an$/R/
+    - xform/[uv]e$/T/
+    - xform/ing$|uai$/Y/
+    - xform/^sh/U/
+    - xform/^ch/I/
+    - xform/^zh/V/
+    - xform/uo$/O/
+    - xform/[uv]n$/P/
+    - xform/i?ong$/S/
+    - xform/[iu]ang$/D/
+    - xform/(.)en$/$1F/
+    - xform/(.)eng$/$1G/
+    - xform/(.)ang$/$1H/
+    - xform/ian$/M/
+    - xform/(.)an$/$1J/
+    - xform/iao$/C/
+    - xform/(.)ao$/$1K/
+    - xform/(.)ai$/$1L/
+    - xform/(.)ei$/$1Z/
+    - xform/ie$/X/
+    - xform/ui$/V/
+    - xform/(.)ou$/$1B/
+    - xform/in$/N/
+    - xlit/QWRTYUIOPSDFGHMJCKLZXVBN/qwrtyuiopsdfghmjcklzxvbn/
+    #- abbrev/^(.).+$/$1/
+
+translator:
+  dictionary: pinyin            # search on <dictionary>.dict.yaml file
+  prism: pinyin_zrm             # 此翻译器生成的 prism 文件的文件名，避免和其他方案的 prism 文件重名
+  enable_charset_filter: true   # 使用字符集过滤
+  encode_commit_history: false  # 对已上屏的词自动成词
+  enable_encoder: false         # 使用自动造词，允许新词进入用户词典
+  enable_sentence: false        # 使用自动造句
+  enable_user_dict: false       # 是否生成 .userdb 用户词典。用户词典记录动态字词频，用户词。
+  # max_phrase_length: 4          # 最大自动成词的词长，开启用户词典后生效
+  preedit_format:
+    - xform/([bpmnljqxy])n/$1in/
+    - xform/(\w)g/$1eng/
+    - xform/(\w)q/$1iu/
+    - xform/([gkhvuirzcs])w/$1ua/
+    - xform/(\w)w/$1ia/
+    - xform/([dtnlgkhjqxyvuirzcs])r/$1uan/
+    - xform/(\w)t/$1ve/
+    - xform/([gkhvuirzcs])y/$1uai/
+    - xform/(\w)y/$1ing/
+    - xform/([dtnlgkhvuirzcs])o/$1uo/
+    - xform/(\w)p/$1un/
+    - xform/([jqx])s/$1iong/
+    - xform/(\w)s/$1ong/
+    - xform/([jqxnl])d/$1iang/
+    - xform/(\w)d/$1uang/
+    - xform/(\w)f/$1en/
+    - xform/(\w)h/$1ang/
+    - xform/(\w)j/$1an/
+    - xform/(\w)k/$1ao/
+    - xform/(\w)l/$1ai/
+    - xform/(\w)z/$1ei/
+    - xform/(\w)x/$1ie/
+    - xform/(\w)c/$1iao/
+    - xform/([dtgkhvuirzcs])v/$1ui/
+    - xform/(\w)b/$1ou/
+    - xform/(\w)m/$1ian/
+    - xform/([aoe])\1(\w)/$1$2/
+    - "xform/(^|[ '])v/$1zh/"
+    - "xform/(^|[ '])i/$1ch/"
+    - "xform/(^|[ '])u/$1sh/"
+    - xform/([jqxy])v/$1u/
+    - xform/([nl])v/$1ü/
+
+reverse_lookup:
+  dictionary: stroke
+  enable_completion: true
+  prefix: "`"
+  suffix: "'"
+  tips: (笔画)
+  preedit_format:
+    - xlit/hspnz/一丨丿丶乙/
+  comment_format:
+    - xform/([nl])v/$1ü/
+
+punctuator:
+  full_shape:
+    __include: punctuation:/full_shape
+  half_shape:
+    __include: punctuation:/half_shape
+  symbols:
+    __include: symbols:/symbols
+
+key_binder:
+  import_preset: default
+
+recognizer:
+  import_preset: default
+  patterns:
+    punct: "^/([0-9]+[a-z]*|[a-z]+)$" # symbol 用的
+    reverse_lookup: "`[a-z]*'?$" # 笔画反查用的
+
+simplifier:
+  # 简入繁出，由 opencc 简繁转换库实现
+  option_name: zh_trad
+  opencc_config: s2t.json
+  # opencc_config: t2s.json   # 繁 -> 简【默认】
+  # opencc_config: t2tw.json  # 繁 -> 台湾
+  # opencc_config: t2hk.json  # 繁 -> 香港

@@ -1,0 +1,37 @@
+﻿# encoding: utf-8
+# Rime dictionary
+#
+# Original table author
+# Li Ding <ld.sino@outlook.com>
+#
+# Changelog
+#
+# 2022-09-14 Li Ding <ld.sino@outlook.com>
+#   - export MS wubi_86 code table with wubi-lex, only keep single words
+#
+# 2024.02.25 Li Ding <ld.sino@outlook.com>
+#   - add phrases from jishuang 4.3
+#   - reorganize dict structure
+#
+
+---
+name: wubi_86
+version: "2024.02.25"
+import_tables:
+  - wubi_86_win10_single
+  - wubi_86_jishuang_phrase
+  - wubi_86_district
+  - wubi_86_user
+encoder:
+  # 以 z 开头的输入不走这个码表 ( 走拼音反查 )
+  exclude_patterns:
+    - '^z.*$'
+  # rules 部分对于单字输入没什么用
+  # rules:
+  #   - length_equal: 2 # 对于 2 字词
+  #     formula: "AaAbBaBb" # 取第一字首尾码、第二字首尾碼
+  #   - length_equal: 3 # 对于 3 字词
+  #     formula: "AaBaCaCb" # 取第一字首尾码、第三字首尾碼
+  #   - length_in_range: [4, 10] # 对于 4 - 10 个字的词
+  #     formula: "AaBaCaZa" # 取第一字首码、第二字首码、第三字首码、最后一字首码
+...
