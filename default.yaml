@@ -15,7 +15,7 @@ schema_list:
 switcher:
   caption: (方案选单)
   hotkeys:
-    - Control+grave
+    - Control+F8
   save_options:
     - ascii_mode
     - full_shape
@@ -41,7 +41,6 @@ key_binder:
       - key_bindings:/move_by_word_with_tab
       - key_bindings:/paging_with_minus_equal
       - key_bindings:/paging_with_comma_period
-      - key_bindings:/numbered_mode_switch
       - key_bindings:/quick_selection
       - key_bindings:/quick_switch_for_vim
 
