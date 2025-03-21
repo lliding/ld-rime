@@ -16,6 +16,7 @@ switcher:
   caption: (方案选单)
   hotkeys:
     - Control+F8
+    - Control+8
   save_options:
     - ascii_mode
     - full_shape

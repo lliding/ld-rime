@@ -1,4 +1,4 @@
-关于本方案的更多介绍请查看 [关于 Rime 输入法的思考](https://note.lishouzhong.com/article/wiki/Rime%20%E8%BE%93%E5%85%A5%E6%B3%95.html) 。
+关于本方案的更多介绍请查看 [Rime 输入法方案描述](https://lishouzhong.com/article/note/uncategoried/Rime%20%E8%BE%93%E5%85%A5%E6%B3%95%E6%96%B9%E6%A1%88%E6%8F%8F%E8%BF%B0/) 。
 
 **由于五笔 86 方案中包含私有码表 (Win10 1809 内置的 86 五笔码表)，故此配置仅用于个人学习与交流。**
 
