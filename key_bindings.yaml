@@ -38,7 +38,7 @@ quick_selection:
   __append:
     - { when: has_menu, accept: semicolon, send: 2 }
     - { when: has_menu, accept: apostrophe, send: 3 }
-    - { when: paging, accept: bracketleft, send: 4 }
+    - { when: has_menu, accept: bracketleft, send: 4 }
     - { when: has_menu, accept: bracketright, send: 5 }
     - { when: has_menu, accept: backslash, send: Escape}
 
